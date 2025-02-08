@@ -1,5 +1,5 @@
 [wokwi]
 version = 1
-firmware = 'ic_rasp_pico.hex'
-elf = 'ic_rasp_pico.elf'
+firmware = 'build/ic_rasp_pico.hex'
+elf = 'build/ic_rasp_pico.elf'
 

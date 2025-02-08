@@ -41,8 +41,8 @@ pico_set_program_name(ic_rasp_pico "ic_rasp_pico")
 pico_set_program_version(ic_rasp_pico "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(ic_rasp_pico 0)
-pico_enable_stdio_usb(ic_rasp_pico 0)
+pico_enable_stdio_uart(ic_rasp_pico 1)
+pico_enable_stdio_usb(ic_rasp_pico 1)
 
 # Add the standard library to the build
 target_link_libraries(ic_rasp_pico

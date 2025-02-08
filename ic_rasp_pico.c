@@ -13,7 +13,7 @@ void setup_all() {
 }
 
 uint32_t ultrasonic() {
-    uint32_t signal_off, singal_on, time_passed = 0;
+    uint32_t signal_off, signal_on, time_passed = 0;
 
     gpio_put(TRIGGER, 0);
     sleep_us(2);
@@ -26,10 +26,10 @@ uint32_t ultrasonic() {
     }
     
     while (gpio_get(ECHO) == 1) {
-        singal_on = time_us_32();
+        signal_on = time_us_32();
     } 
     
-    time_passed = singal_on - signal_off;
+    time_passed = signal_on - signal_off;
     return time_passed;
     
 }
@@ -39,9 +39,12 @@ int main() {
   setup_all();
 
   uint32_t measured_time;
+  float distance_cm;
 
   while (true) {
-    
+    measured_time = ultrasonic();
+    distance_cm = (measured_time * 0.0343) / 2;
+    printf("distance_cm: %.2f\n", distance_cm);
     sleep_ms(1000);
   }
 }
