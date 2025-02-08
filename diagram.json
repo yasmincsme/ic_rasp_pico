@@ -11,7 +11,7 @@
         "attrs": { "builder": "pico-sdk" }
       },
       { "type": "wokwi-hc-sr04", "id": "ultrasonic1", "top": -132.9, "left": 24.7, "attrs": {} },
-      { "type": "wokwi-mpu6050", "id": "imu1", "top": 80.62, "left": -141.68, "attrs": {} }
+      { "type": "wokwi-mpu6050", "id": "imu1", "top": 128.62, "left": 194.32, "attrs": {} }
     ],
     "connections": [
       [ "pico:GP0", "$serialMonitor:RX", "", [] ],
@@ -19,7 +19,11 @@
       [ "pico:VSYS", "ultrasonic1:VCC", "red", [ "h0" ] ],
       [ "pico:GND.5", "ultrasonic1:GND", "black", [ "h0" ] ],
       [ "pico:GP18", "ultrasonic1:ECHO", "green", [ "h0" ] ],
-      [ "pico:GP19", "ultrasonic1:TRIG", "green", [ "h0" ] ]
+      [ "pico:GP19", "ultrasonic1:TRIG", "green", [ "h0" ] ],
+      [ "pico:3V3_EN", "imu1:VCC", "red", [ "h0" ] ],
+      [ "imu1:GND", "pico:GND.7", "black", [ "v0" ] ],
+      [ "imu1:SCL", "pico:GP27", "gray", [ "v0" ] ],
+      [ "imu1:SDA", "pico:GP26", "gray", [ "v0" ] ]
     ],
     "dependencies": {}
   }

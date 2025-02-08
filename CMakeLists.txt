@@ -46,7 +46,8 @@ pico_enable_stdio_usb(ic_rasp_pico 1)
 
 # Add the standard library to the build
 target_link_libraries(ic_rasp_pico
-        pico_stdlib)
+        pico_stdlib
+        hardware_i2c)
 
 # Add the standard include files to the build
 target_include_directories(ic_rasp_pico PRIVATE
