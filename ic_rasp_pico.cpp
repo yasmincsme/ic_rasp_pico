@@ -31,13 +31,9 @@ void gpio_irq_handler(uint gpio, uint32_t events) {
     else if (gpio == ECHO_PIN && (events & GPIO_IRQ_EDGE_RISE)) {
         start_time = to_us_since_boot(get_absolute_time());
         end_time = 0;
-        gpio_set_irq_enabled(ECHO_PIN, GPIO_IRQ_EDGE_RISE, false);
-        gpio_set_irq_enabled(ECHO_PIN, GPIO_IRQ_EDGE_FALL, true);
     }
     else if(gpio == ECHO_PIN && (events & GPIO_IRQ_EDGE_FALL)) {
         end_time = to_us_since_boot(get_absolute_time());
-        gpio_set_irq_enabled(ECHO_PIN, GPIO_IRQ_EDGE_FALL, false);
-        gpio_set_irq_enabled(ECHO_PIN, GPIO_IRQ_EDGE_RISE, true);
         measure_done = true;
         
     }
@@ -60,7 +56,7 @@ void setup() {
     gpio_pull_down(ECHO_PIN);
 
     gpio_set_irq_enabled_with_callback(BUTTON, GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
-    gpio_set_irq_enabled_with_callback(ECHO_PIN, GPIO_IRQ_EDGE_RISE, true,  &gpio_irq_handler);
+    gpio_set_irq_enabled_with_callback(ECHO_PIN, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true,  &gpio_irq_handler);
 }
 
 int main() {
