@@ -10,7 +10,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 if(WIN32)
     set(USERHOME $ENV{USERPROFILE})
 else()
-    set(USERNAME $ENV{HOME})
+    set(USERHOME $ENV{HOME})
 endif()
 set(sdkVersion 2.1.0)
 set(toolchainVersion 13_3_Rel1)
@@ -25,10 +25,9 @@ set(PICO_BOARD pico CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK
 include(pico_sdk_import.cmake)
 
-# Define project for C++ as well
 project(ic_rasp_pico C CXX ASM)
 
-# Initialize SDK
+# Initialize the SDK
 pico_sdk_init()
 
 # Add the main executable
@@ -44,7 +43,7 @@ pico_set_program_version(ic_rasp_pico "0.1")
 pico_enable_stdio_uart(ic_rasp_pico 1)
 pico_enable_stdio_usb(ic_rasp_pico 1)
 
-# Include necessary directories
+# Include current directory
 target_include_directories(ic_rasp_pico PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}
 )
@@ -53,7 +52,9 @@ target_include_directories(ic_rasp_pico PRIVATE
 target_link_libraries(ic_rasp_pico
     pico_stdlib
     hardware_i2c
+    hardware_timer
+    hardware_adc
 )
 
-# Generate binary outputs like .uf2
+# Generate UF2 and other output formats
 pico_add_extra_outputs(ic_rasp_pico)
